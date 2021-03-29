@@ -26,6 +26,12 @@ class LogInPage extends StatelessWidget {
   Widget _createBG(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
+    final TextStyle style = TextStyle(
+      color: Colors.white,
+      fontWeight: FontWeight.bold,
+      fontSize: 30,
+    );
+
     final purpleBG = Container(
       width: double.infinity,
       height: size.height * 0.4,
@@ -48,11 +54,35 @@ class LogInPage extends StatelessWidget {
       ),
     );
 
+    final person = Center(
+      child: Container(
+        padding: EdgeInsets.only(top: 80.0),
+        child: Column(
+          children: [
+            Icon(
+              Icons.person_pin_circle,
+              color: Colors.white,
+              size: 100.0,
+            ),
+            SizedBox(
+              height: 10.0,
+              width: double.infinity,
+            ),
+            Text(
+              'Jordi Silva',
+              style: style,
+            ),
+          ],
+        ),
+      ),
+    );
+
     return Stack(
       children: [
         purpleBG,
         Positioned(child: circle, top: 90.0, left: 30.0),
-        Positioned(child: circle, bottom: 30.0, right: 30.0),
+        Positioned(child: circle, top: 160.0, left: 250.0),
+        person,
       ],
     );
   }
