@@ -96,8 +96,9 @@ class LogInPage extends StatelessWidget {
               ),
               hintText: 'example@mail.com',
               labelText: 'E-Mail',
+              helperText: snapshot.data,
             ),
-            onChanged: (s) => bloc.changeEmail(s),
+            onChanged: bloc.changeEmail,
           ),
         );
       },
@@ -105,24 +106,28 @@ class LogInPage extends StatelessWidget {
   }
 
   Widget _createPassword(LoginBloc bloc) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 40.0),
-      child: TextField(
-        cursorColor: Colors.deepPurple,
-        obscureText: true,
-        decoration: InputDecoration(
-          icon: Icon(Icons.vpn_key_outlined, color: Colors.deepPurple),
-          labelStyle: TextStyle(color: Colors.black26),
-          focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.deepPurple),
+    return StreamBuilder(
+      stream: bloc.passwordStream,
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        return Container(
+          padding: EdgeInsets.symmetric(horizontal: 40.0),
+          child: TextField(
+            cursorColor: Colors.deepPurple,
+            obscureText: true,
+            decoration: InputDecoration(
+              icon: Icon(Icons.vpn_key_outlined, color: Colors.deepPurple),
+              labelStyle: TextStyle(color: Colors.black26),
+              focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Colors.deepPurple),
+              ),
+              hoverColor: Colors.deepPurple,
+              labelText: 'Password',
+              helperText: snapshot.data,
+            ),
+            onChanged: bloc.changePassword,
           ),
-          hoverColor: Colors.deepPurple,
-          labelText: 'Password',
-        ),
-        onChanged: (s) {
-          bloc.changePassword(s);
-        },
-      ),
+        );
+      },
     );
   }
 
