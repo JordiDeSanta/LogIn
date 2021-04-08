@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'package:login/src/bloc/provider.dart';
+
 class LogInPage extends StatelessWidget {
   const LogInPage({Key key}) : super(key: key);
 
@@ -25,6 +27,7 @@ class LogInPage extends StatelessWidget {
   }
 
   Widget _loginForm(BuildContext context) {
+    final bloc = Provider.of(context);
     final size = MediaQuery.of(context).size;
 
     final TextStyle style = TextStyle(
@@ -61,8 +64,8 @@ class LogInPage extends StatelessWidget {
                   'Log In',
                   style: style,
                 ),
-                _createEmail(),
-                _createPassword(),
+                _createEmail(bloc),
+                _createPassword(bloc),
                 _createButton(),
               ],
             ),
@@ -76,26 +79,32 @@ class LogInPage extends StatelessWidget {
     );
   }
 
-  Widget _createEmail() {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 40.0, vertical: 20.0),
-      child: TextField(
-        cursorColor: Colors.deepPurple,
-        keyboardType: TextInputType.emailAddress,
-        decoration: InputDecoration(
-          icon: Icon(Icons.alternate_email, color: Colors.deepPurple),
-          labelStyle: TextStyle(color: Colors.black26),
-          focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.deepPurple),
+  Widget _createEmail(LoginBloc bloc) {
+    return StreamBuilder(
+      stream: bloc.emailStream,
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        return Container(
+          padding: EdgeInsets.symmetric(horizontal: 40.0, vertical: 20.0),
+          child: TextField(
+            cursorColor: Colors.deepPurple,
+            keyboardType: TextInputType.emailAddress,
+            decoration: InputDecoration(
+              icon: Icon(Icons.alternate_email, color: Colors.deepPurple),
+              labelStyle: TextStyle(color: Colors.black26),
+              focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Colors.deepPurple),
+              ),
+              hintText: 'example@mail.com',
+              labelText: 'E-Mail',
+            ),
+            onChanged: (s) => bloc.changeEmail(s),
           ),
-          hintText: 'example@mail.com',
-          labelText: 'E-Mail',
-        ),
-      ),
+        );
+      },
     );
   }
 
-  Widget _createPassword() {
+  Widget _createPassword(LoginBloc bloc) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 40.0),
       child: TextField(
@@ -110,6 +119,9 @@ class LogInPage extends StatelessWidget {
           hoverColor: Colors.deepPurple,
           labelText: 'Password',
         ),
+        onChanged: (s) {
+          bloc.changePassword(s);
+        },
       ),
     );
   }
