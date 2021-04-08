@@ -91,9 +91,6 @@ class LogInPage extends StatelessWidget {
             decoration: InputDecoration(
               icon: Icon(Icons.alternate_email, color: Colors.deepPurple),
               labelStyle: TextStyle(color: Colors.black26),
-              focusedBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: Colors.deepPurple),
-              ),
               hintText: 'example@mail.com',
               labelText: 'E-Mail',
               helperText: snapshot.data,
@@ -117,9 +114,6 @@ class LogInPage extends StatelessWidget {
             decoration: InputDecoration(
               icon: Icon(Icons.vpn_key_outlined, color: Colors.deepPurple),
               labelStyle: TextStyle(color: Colors.black26),
-              focusedBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: Colors.deepPurple),
-              ),
               hoverColor: Colors.deepPurple,
               labelText: 'Password',
               helperText: snapshot.data,
