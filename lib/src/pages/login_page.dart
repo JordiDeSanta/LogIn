@@ -150,11 +150,18 @@ class LogInPage extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 70.0, vertical: 15.0),
               child: Text('Log In'),
             ),
-            onPressed: snapshot.hasData ? () {} : null,
+            onPressed: snapshot.hasData ? () => _login(bloc) : null,
           );
         },
       ),
     );
+  }
+
+  _login(LoginBloc bloc) {
+    print('===============');
+    print('Email: ${bloc.email}');
+    print('Password: ${bloc.password}');
+    print('===============');
   }
 
   Widget _createBG(BuildContext context) {
