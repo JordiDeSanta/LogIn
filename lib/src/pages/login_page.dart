@@ -66,7 +66,7 @@ class LogInPage extends StatelessWidget {
                 ),
                 _createEmail(bloc),
                 _createPassword(bloc),
-                _createButton(),
+                _createButton(bloc),
               ],
             ),
           ),
@@ -125,28 +125,51 @@ class LogInPage extends StatelessWidget {
     );
   }
 
-  Widget _createButton() {
+  Widget _createButton(LoginBloc bloc) {
     final TextStyle style = TextStyle(
       fontSize: 20.0,
       fontWeight: FontWeight.w300,
     );
 
+    final activeButton = ElevatedButton(
+      style: ButtonStyle(
+        backgroundColor: MaterialStateProperty.all(Colors.deepPurple),
+        shape: MaterialStateProperty.all(
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
+        ),
+        elevation: MaterialStateProperty.all(0.0),
+        textStyle: MaterialStateProperty.all(style),
+      ),
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 70.0, vertical: 15.0),
+        child: Text('Log In'),
+      ),
+      onPressed: () {},
+    );
+
+    final deactivatedButton = ElevatedButton(
+      style: ButtonStyle(
+        backgroundColor: MaterialStateProperty.all(Colors.deepPurple),
+        shape: MaterialStateProperty.all(
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
+        ),
+        elevation: MaterialStateProperty.all(0.0),
+        textStyle: MaterialStateProperty.all(style),
+      ),
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 70.0, vertical: 15.0),
+        child: Text('Log In'),
+      ),
+      onPressed: null,
+    );
+
     return Padding(
       padding: EdgeInsets.only(top: 30.0),
-      child: ElevatedButton(
-        style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all(Colors.deepPurple),
-          shape: MaterialStateProperty.all(
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
-          ),
-          elevation: MaterialStateProperty.all(0.0),
-          textStyle: MaterialStateProperty.all(style),
-        ),
-        child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 70.0, vertical: 15.0),
-          child: Text('Log In'),
-        ),
-        onPressed: () {},
+      child: StreamBuilder(
+        stream: bloc.formValidStream,
+        builder: (context, AsyncSnapshot snapshot) {
+          return snapshot.hasData ? activeButton : deactivatedButton;
+        },
       ),
     );
   }
