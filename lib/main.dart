@@ -3,6 +3,7 @@ import 'package:login/src/bloc/provider.dart';
 
 import 'package:login/src/pages/home_page.dart';
 import 'package:login/src/pages/login_page.dart';
+import 'package:login/src/pages/product_page.dart';
 
 void main() => runApp(MyApp());
 
@@ -13,10 +14,11 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Log In App',
-        initialRoute: 'login',
+        initialRoute: 'home',
         routes: {
           'login': (BuildContext context) => LogInPage(),
           'home': (BuildContext context) => HomePage(),
+          'product': (BuildContext context) => ProductPage(),
         },
         theme: ThemeData(
           primaryColor: Colors.deepPurple,

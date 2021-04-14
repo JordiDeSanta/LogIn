@@ -10,9 +10,18 @@ class HomePage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Email: ${bloc.email}', overflow: TextOverflow.fade),
+        title: Text('Home'),
       ),
-      body: Center(child: Text('Password:  ${bloc.password}')),
+      floatingActionButton: _createButton(context),
+    );
+  }
+
+  _createButton(BuildContext context) {
+    return FloatingActionButton(
+      child: Icon(Icons.arrow_forward_ios),
+      onPressed: () {
+        Navigator.pushNamed(context, 'product');
+      },
     );
   }
 }
