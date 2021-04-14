@@ -50,18 +50,17 @@ class ProductPage extends StatelessWidget {
   }
 
   Widget _createButton() {
-    return ElevatedButton(
+    return ElevatedButton.icon(
       onPressed: () {},
-      child: Container(
-        //width: 30.0,
-        //height: 10.0,
-        child: Row(
-          children: [
-            Text('Save'),
-            Icon(Icons.save),
-          ],
-        ),
+      style: ButtonStyle(
+        elevation: MaterialStateProperty.all(0.0),
+        backgroundColor: MaterialStateProperty.all(Colors.deepPurple),
+        shape: MaterialStateProperty.all(RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20.0),
+        )),
       ),
+      icon: Icon(Icons.save),
+      label: Text('Save', style: TextStyle(fontWeight: FontWeight.w300)),
     );
   }
 }
