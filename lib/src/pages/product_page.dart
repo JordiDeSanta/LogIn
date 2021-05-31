@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:login/src/models/product_model.dart';
+import 'package:login/src/providers/product_provider.dart';
 import 'package:login/src/utils/utils.dart' as utils;
 
 class ProductPage extends StatefulWidget {
@@ -11,6 +12,7 @@ class _ProductPageState extends State<ProductPage> {
   final formKey = GlobalKey<FormState>();
 
   ProductModel product = new ProductModel();
+  final productProvider = new ProductsProvider();
 
   @override
   Widget build(BuildContext context) {
@@ -110,5 +112,7 @@ class _ProductPageState extends State<ProductPage> {
     if (!formKey.currentState.validate()) return;
 
     formKey.currentState.save();
+
+    productProvider.createProduct(product);
   }
 }
