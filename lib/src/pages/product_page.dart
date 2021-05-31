@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:login/src/models/product_model.dart';
 import 'package:login/src/utils/utils.dart' as utils;
 
 class ProductPage extends StatefulWidget {
@@ -8,6 +9,8 @@ class ProductPage extends StatefulWidget {
 
 class _ProductPageState extends State<ProductPage> {
   final formKey = GlobalKey<FormState>();
+
+  ProductModel product = new ProductModel();
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +37,7 @@ class _ProductPageState extends State<ProductPage> {
               children: [
                 _createName(),
                 _createPrice(),
+                _createAvailable(),
                 _createButton(),
               ],
             ),
@@ -45,10 +49,12 @@ class _ProductPageState extends State<ProductPage> {
 
   Widget _createName() {
     return TextFormField(
+      initialValue: product.title,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
         labelText: 'Product',
       ),
+      onSaved: (v) => product.title = v,
       validator: (v) {
         return (v.length < 3) ? 'Enter the name of the product' : null;
       },
@@ -57,11 +63,13 @@ class _ProductPageState extends State<ProductPage> {
 
   Widget _createPrice() {
     return TextFormField(
+      initialValue: product.value.toString(),
       keyboardType: TextInputType.number,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
         labelText: 'Price',
       ),
+      onSaved: (v) => product.value = double.parse(v),
       validator: (v) {
         if (utils.isNumeric(v)) {
           return null;
@@ -69,6 +77,17 @@ class _ProductPageState extends State<ProductPage> {
           return 'Just numbers please';
         }
       },
+    );
+  }
+
+  Widget _createAvailable() {
+    return SwitchListTile(
+      activeColor: Colors.deepPurple,
+      title: Text('Available?'),
+      value: product.available,
+      onChanged: (b) => setState(() {
+        product.available = b;
+      }),
     );
   }
 
@@ -89,6 +108,7 @@ class _ProductPageState extends State<ProductPage> {
 
   void _submit() {
     if (!formKey.currentState.validate()) return;
-    print('xd');
+
+    formKey.currentState.save();
   }
 }
