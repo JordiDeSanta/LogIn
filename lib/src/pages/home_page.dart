@@ -15,6 +15,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Home'),
+        centerTitle: true,
       ),
       floatingActionButton: _createButton(context),
       body: _createProductList(),
@@ -27,11 +28,26 @@ class HomePage extends StatelessWidget {
       builder:
           (BuildContext context, AsyncSnapshot<List<ProductModel>> snapshot) {
         if (snapshot.hasData) {
-          return Container();
+          final products = snapshot.data;
+
+          return ListView.builder(
+            itemCount: products.length,
+            itemBuilder: (context, i) => _createItem(products[i]),
+          );
         } else {
           return CircularProgressIndicator();
         }
       },
+    );
+  }
+
+  Widget _createItem(ProductModel product) {
+    return Dismissible(
+      background: Container(color: Colors.red),
+      key: UniqueKey(),
+      child: ListTile(
+        title: Text(product.title + " - " + product.value.toString()),
+      ),
     );
   }
 
