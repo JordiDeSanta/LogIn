@@ -48,6 +48,9 @@ class HomePage extends StatelessWidget {
       child: ListTile(
         title: Text(product.title + " - " + product.value.toString()),
       ),
+      onDismissed: (d) {
+        productsProvider.deleteProduct(product.id);
+      },
     );
   }
 

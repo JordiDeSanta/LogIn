@@ -35,4 +35,11 @@ class ProductsProvider {
 
     return products;
   }
+
+  Future<int> deleteProduct(String id) async {
+    final url = Uri.https(_url, 'products/$id.json');
+    final resp = await http.delete(url);
+
+    return 1;
+  }
 }
