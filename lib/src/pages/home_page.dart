@@ -3,9 +3,14 @@ import 'package:login/src/bloc/provider.dart';
 import 'package:login/src/models/product_model.dart';
 import 'package:login/src/providers/product_provider.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   HomePage({Key key}) : super(key: key);
 
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   final productsProvider = new ProductsProvider();
 
   @override
@@ -32,7 +37,7 @@ class HomePage extends StatelessWidget {
 
           return ListView.builder(
             itemCount: products.length,
-            itemBuilder: (context, i) => _createItem(products[i]),
+            itemBuilder: (context, i) => _createItem(context, products[i]),
           );
         } else {
           return CircularProgressIndicator();
@@ -41,12 +46,15 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget _createItem(ProductModel product) {
+  Widget _createItem(BuildContext context, ProductModel product) {
     return Dismissible(
       background: Container(color: Colors.red),
       key: UniqueKey(),
       child: ListTile(
         title: Text(product.title + " - " + product.value.toString()),
+        subtitle: Text(product.id),
+        onTap: () =>
+            Navigator.pushNamed(context, 'product', arguments: product),
       ),
       onDismissed: (d) {
         productsProvider.deleteProduct(product.id);
