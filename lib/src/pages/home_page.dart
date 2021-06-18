@@ -53,8 +53,8 @@ class _HomePageState extends State<HomePage> {
       child: ListTile(
         title: Text(product.title + " - " + product.value.toString()),
         subtitle: Text(product.id),
-        onTap: () =>
-            Navigator.pushNamed(context, 'product', arguments: product),
+        onTap: () => Navigator.pushNamed(context, 'product', arguments: product)
+            .then((value) => setState(() {})),
       ),
       onDismissed: (d) {
         productsProvider.deleteProduct(product.id);
@@ -66,7 +66,8 @@ class _HomePageState extends State<HomePage> {
     return FloatingActionButton(
       child: Icon(Icons.arrow_forward_ios),
       onPressed: () {
-        Navigator.pushNamed(context, 'product');
+        Navigator.pushNamed(context, 'product')
+            .then((value) => setState(() {}));
       },
     );
   }
