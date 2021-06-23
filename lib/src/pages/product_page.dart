@@ -10,9 +10,12 @@ class ProductPage extends StatefulWidget {
 
 class _ProductPageState extends State<ProductPage> {
   final formKey = GlobalKey<FormState>();
+  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   ProductModel product = new ProductModel();
   final productProvider = new ProductsProvider();
+
+  bool bSaving = false;
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +25,7 @@ class _ProductPageState extends State<ProductPage> {
     }
 
     return Scaffold(
+      key: scaffoldKey,
       appBar: AppBar(
         title: Text('Product'),
         actions: [
@@ -45,7 +49,7 @@ class _ProductPageState extends State<ProductPage> {
                 _createName(),
                 _createPrice(),
                 _createAvailable(),
-                _createButton(),
+                _saveButton(),
               ],
             ),
           ),
@@ -98,7 +102,7 @@ class _ProductPageState extends State<ProductPage> {
     );
   }
 
-  Widget _createButton() {
+  Widget _saveButton() {
     return ElevatedButton.icon(
       onPressed: _submit,
       style: ButtonStyle(
@@ -118,10 +122,28 @@ class _ProductPageState extends State<ProductPage> {
 
     formKey.currentState.save();
 
+    setState(() {
+      bSaving = true;
+    });
+
     if (product.id == null) {
       productProvider.createProduct(product);
     } else {
       productProvider.editProduct(product);
     }
+
+    setState(() {
+      bSaving = true;
+    });
+    showSnackbar('Saved!');
+  }
+
+  void showSnackbar(String message) {
+    final snackbar = SnackBar(
+      content: Text(message),
+      duration: Duration(milliseconds: 1500),
+    );
+
+    scaffoldKey.currentState.showSnackBar(snackbar);
   }
 }
