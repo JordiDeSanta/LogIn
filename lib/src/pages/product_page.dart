@@ -104,7 +104,7 @@ class _ProductPageState extends State<ProductPage> {
 
   Widget _saveButton() {
     return ElevatedButton.icon(
-      onPressed: _submit,
+      onPressed: (bSaving) ? null : _submit,
       style: ButtonStyle(
         elevation: MaterialStateProperty.all(0.0),
         backgroundColor: MaterialStateProperty.all(Colors.deepPurple),
@@ -133,7 +133,7 @@ class _ProductPageState extends State<ProductPage> {
     }
 
     setState(() {
-      bSaving = true;
+      bSaving = false;
     });
     showSnackbar('Saved!');
   }
