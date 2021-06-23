@@ -132,10 +132,7 @@ class _ProductPageState extends State<ProductPage> {
       productProvider.editProduct(product);
     }
 
-    setState(() {
-      bSaving = false;
-    });
-    showSnackbar('Saved!');
+    Navigator.pop(context);
   }
 
   void showSnackbar(String message) {
