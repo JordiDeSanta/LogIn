@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:login/src/models/product_model.dart';
 import 'package:login/src/providers/product_provider.dart';
 import 'package:login/src/utils/utils.dart' as utils;
@@ -16,6 +19,7 @@ class _ProductPageState extends State<ProductPage> {
   final productProvider = new ProductsProvider();
 
   bool bSaving = false;
+  File photo;
 
   @override
   Widget build(BuildContext context) {
@@ -31,11 +35,11 @@ class _ProductPageState extends State<ProductPage> {
         actions: [
           IconButton(
             icon: Icon(Icons.photo),
-            onPressed: () {},
+            onPressed: _selectPhoto,
           ),
           IconButton(
             icon: Icon(Icons.camera_alt),
-            onPressed: () {},
+            onPressed: _takePhoto,
           ),
         ],
       ),
@@ -46,6 +50,7 @@ class _ProductPageState extends State<ProductPage> {
             key: formKey,
             child: Column(
               children: [
+                _showPhoto(),
                 _createName(),
                 _createPrice(),
                 _createAvailable(),
@@ -143,4 +148,38 @@ class _ProductPageState extends State<ProductPage> {
 
     scaffoldKey.currentState.showSnackBar(snackbar);
   }
+
+  _showPhoto() {
+    if (product.photoUrl != null) {
+      return FadeInImage(
+        placeholder: AssetImage('assets/jar-loading.gif'),
+        image: NetworkImage(product.photoUrl),
+        height: 300.0,
+        fit: BoxFit.cover,
+      );
+    } else {
+      return (photo == null)
+          ? Image(
+              image: AssetImage('assets/no-image.png'),
+              height: 300,
+              fit: BoxFit.cover,
+            )
+          : Image.file(
+              photo,
+              height: 300,
+              fit: BoxFit.cover,
+            );
+    }
+  }
+
+  _selectPhoto() async {
+    final _photo = await ImagePicker().getImage(source: ImageSource.gallery);
+    photo = File(_photo.path);
+
+    if (photo != null) {}
+
+    setState(() {});
+  }
+
+  _takePhoto() {}
 }
