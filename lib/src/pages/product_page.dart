@@ -1,4 +1,5 @@
 import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:login/src/models/product_model.dart';
@@ -34,11 +35,11 @@ class _ProductPageState extends State<ProductPage> {
         actions: [
           IconButton(
             icon: Icon(Icons.photo),
-            onPressed: _getPhoto(ImageSource.gallery),
+            onPressed: _selectPhoto,
           ),
           IconButton(
             icon: Icon(Icons.camera_alt),
-            onPressed: _getPhoto(ImageSource.camera),
+            onPressed: _takePhoto,
           ),
         ],
       ),
@@ -171,12 +172,14 @@ class _ProductPageState extends State<ProductPage> {
     }
   }
 
-  _getPhoto(ImageSource s) async {
-    final _photo = await ImagePicker().getImage(source: s);
+  _selectPhoto() async {
+    final _photo = await ImagePicker().getImage(source: ImageSource.gallery);
     photo = File(_photo.path);
 
     if (photo != null) {}
 
     setState(() {});
   }
+
+  _takePhoto() {}
 }
