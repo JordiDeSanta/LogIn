@@ -181,5 +181,12 @@ class _ProductPageState extends State<ProductPage> {
     setState(() {});
   }
 
-  _takePhoto() {}
+  _takePhoto() async {
+    final _photo = await ImagePicker().getImage(source: ImageSource.camera);
+    photo = File(_photo.path);
+
+    if (photo != null) {}
+
+    setState(() {});
+  }
 }
