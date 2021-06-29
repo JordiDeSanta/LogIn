@@ -51,6 +51,15 @@ class _HomePageState extends State<HomePage> {
       background: Container(color: Colors.red),
       key: UniqueKey(),
       child: ListTile(
+        leading: FadeInImage(
+          width: 50,
+          height: 50,
+          fit: BoxFit.cover,
+          placeholder: AssetImage('assets/jar-loading.gif'),
+          image: (product.photoUrl != null)
+              ? NetworkImage(product.photoUrl)
+              : AssetImage('assets/no-image.png'),
+        ),
         title: Text(product.title + " - " + product.value.toString()),
         subtitle: Text(product.id),
         onTap: () => Navigator.pushNamed(context, 'product', arguments: product)
