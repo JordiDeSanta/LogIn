@@ -158,19 +158,22 @@ class _ProductPageState extends State<ProductPage> {
       return FadeInImage(
         placeholder: AssetImage('assets/jar-loading.gif'),
         image: NetworkImage(product.photoUrl),
-        height: 300.0,
+        height: 400.0,
+        width: 400.0,
         fit: BoxFit.cover,
       );
     } else {
       return (photo == null)
           ? Image(
               image: AssetImage('assets/no-image.png'),
-              height: 300,
+              width: 400,
+              height: 400,
               fit: BoxFit.cover,
             )
           : Image.file(
               photo,
-              height: 300,
+              width: 400,
+              height: 400,
               fit: BoxFit.cover,
             );
     }
