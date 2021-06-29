@@ -59,8 +59,8 @@ class ProductsProvider {
   }
 
   Future<String> uploadImage(File img) async {
-    final url =
-        Uri.parse("https://api.cloudinary.com/v1_1/dwhd7wpsu/image/upload");
+    final url = Uri.parse(
+        "https://api.cloudinary.com/v1_1/dwhd7wpsu/image/upload?upload_preset=doxxxo3z");
 
     final mimeType = mime(img.path).split('/');
 
@@ -82,6 +82,7 @@ class ProductsProvider {
 
     if (resp.statusCode != 200 && resp.statusCode != 201) {
       print("Algo salió mal :(");
+      print(resp.body);
       return null;
     }
 
