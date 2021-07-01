@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:login/src/bloc/provider.dart';
+import 'package:login/src/providers/use_provider.dart';
 
 class RegisterPage extends StatelessWidget {
-  const RegisterPage({Key key}) : super(key: key);
+  final userProvider = new UserProvider();
 
   @override
   Widget build(BuildContext context) {
@@ -156,22 +157,17 @@ class RegisterPage extends StatelessWidget {
             ),
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 70.0, vertical: 15.0),
-              child: Text('Log In'),
+              child: Text('Register'),
             ),
-            onPressed: snapshot.hasData ? () => _login(bloc, context) : null,
+            onPressed: snapshot.hasData ? () => _register(bloc, context) : null,
           );
         },
       ),
     );
   }
 
-  _login(LoginBloc bloc, BuildContext context) {
-    print('===============');
-    print('Email: ${bloc.email}');
-    print('Password: ${bloc.password}');
-    print('===============');
-
-    Navigator.pushNamed(context, 'home');
+  _register(LoginBloc bloc, BuildContext context) {
+    userProvider.newUser(bloc.email, bloc.password);
   }
 
   Widget _createBG(BuildContext context) {
