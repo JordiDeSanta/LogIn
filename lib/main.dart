@@ -4,6 +4,7 @@ import 'package:login/src/bloc/provider.dart';
 import 'package:login/src/pages/home_page.dart';
 import 'package:login/src/pages/login_page.dart';
 import 'package:login/src/pages/product_page.dart';
+import 'package:login/src/pages/register_page.dart';
 
 void main() => runApp(MyApp());
 
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
           'login': (BuildContext context) => LogInPage(),
           'home': (BuildContext context) => HomePage(),
           'product': (BuildContext context) => ProductPage(),
+          'logup': (BuildContext context) => RegisterPage(),
         },
         theme: ThemeData(
           primaryColor: Colors.deepPurple,

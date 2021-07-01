@@ -3,8 +3,8 @@ import 'package:flutter/services.dart';
 
 import 'package:login/src/bloc/provider.dart';
 
-class LogInPage extends StatelessWidget {
-  const LogInPage({Key key}) : super(key: key);
+class RegisterPage extends StatelessWidget {
+  const RegisterPage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +61,7 @@ class LogInPage extends StatelessWidget {
             child: Column(
               children: [
                 Text(
-                  'Log In',
+                  'Create Account',
                   style: style,
                 ),
                 _createEmail(bloc),
@@ -72,9 +72,9 @@ class LogInPage extends StatelessWidget {
           ),
           SizedBox(height: 30.0),
           ElevatedButton(
-            onPressed: () => Navigator.pushReplacementNamed(context, 'logup'),
+            onPressed: () => Navigator.pushReplacementNamed(context, 'login'),
             child: Text(
-              'Log Up',
+              'Log In',
               style: TextStyle(color: Colors.black54),
             ),
             style: ButtonStyle(
