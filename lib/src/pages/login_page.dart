@@ -71,8 +71,17 @@ class LogInPage extends StatelessWidget {
             ),
           ),
           SizedBox(height: 30.0),
-          Text('Forgot password?',
-              style: TextStyle(fontWeight: FontWeight.w300)),
+          ElevatedButton(
+            onPressed: () =>
+                Navigator.pushReplacementNamed(context, 'register'),
+            child: Text(
+              'Register',
+              style: TextStyle(color: Colors.black54),
+            ),
+            style: ButtonStyle(
+                elevation: MaterialStateProperty.all(0.0),
+                backgroundColor: MaterialStateProperty.all(Colors.transparent)),
+          ),
           SizedBox(height: 100.0),
         ],
       ),
