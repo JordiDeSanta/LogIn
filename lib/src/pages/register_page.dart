@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:login/src/bloc/provider.dart';
-import 'package:login/src/providers/use_provider.dart';
+import 'package:login/src/providers/user_provider.dart';
 
 class RegisterPage extends StatelessWidget {
   final userProvider = new UserProvider();
@@ -166,8 +166,8 @@ class RegisterPage extends StatelessWidget {
     );
   }
 
-  _register(LoginBloc bloc, BuildContext context) {
-    userProvider.newUser(bloc.email, bloc.password);
+  _register(LoginBloc bloc, BuildContext context) async {
+    bool basda = await userProvider.newUser(bloc.email, bloc.password);
   }
 
   Widget _createBG(BuildContext context) {

@@ -21,6 +21,10 @@ class UserProvider {
 
     Map<String, dynamic> decodedResp = json.decode(resp.body);
 
-    print(decodedResp);
+    if (decodedResp.containsKey('idToken')) {
+      return {'ok': true, 'token': decodedResp['idToken']};
+    } else {
+      return {'ok': false, 'message': decodedResp['error']['message']};
+    }
   }
 }
