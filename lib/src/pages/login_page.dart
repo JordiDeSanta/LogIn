@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:login/src/bloc/provider.dart';
+import 'package:login/src/providers/user_provider.dart';
 
 class LogInPage extends StatelessWidget {
-  const LogInPage({Key key}) : super(key: key);
+  final userProvider = new UserProvider();
 
   @override
   Widget build(BuildContext context) {
@@ -166,12 +167,7 @@ class LogInPage extends StatelessWidget {
   }
 
   _login(LoginBloc bloc, BuildContext context) {
-    print('===============');
-    print('Email: ${bloc.email}');
-    print('Password: ${bloc.password}');
-    print('===============');
-
-    Navigator.pushNamed(context, 'home');
+    userProvider.login(bloc.email, bloc.password);
   }
 
   Widget _createBG(BuildContext context) {

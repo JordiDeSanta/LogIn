@@ -167,7 +167,9 @@ class RegisterPage extends StatelessWidget {
   }
 
   _register(LoginBloc bloc, BuildContext context) async {
-    bool basda = await userProvider.newUser(bloc.email, bloc.password);
+    final bNewUser = await userProvider.newUser(bloc.email, bloc.password);
+
+    if (!bNewUser['ok']) {}
   }
 
   Widget _createBG(BuildContext context) {
