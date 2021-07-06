@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 
 import 'package:login/src/bloc/provider.dart';
 import 'package:login/src/providers/user_provider.dart';
+import 'package:login/src/utils/utils.dart' as utils;
 
 class LogInPage extends StatelessWidget {
   final userProvider = new UserProvider();
@@ -166,8 +167,14 @@ class LogInPage extends StatelessWidget {
     );
   }
 
-  _login(LoginBloc bloc, BuildContext context) {
-    userProvider.login(bloc.email, bloc.password);
+  _login(LoginBloc bloc, BuildContext context) async {
+    Map info = await userProvider.login(bloc.email, bloc.password);
+
+    if (info['ok']) {
+      Navigator.pushReplacementNamed(context, 'home');
+    } else {
+      utils.showAlert(context, info['message']);
+    }
   }
 
   Widget _createBG(BuildContext context) {

@@ -8,6 +8,7 @@ import 'package:login/src/pages/register_page.dart';
 import 'package:login/src/user_preferences/user_prefs.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   final prefs = new UserPreferences();
   await prefs.initPrefs();
 
@@ -17,6 +18,9 @@ void main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final prefs = new UserPreferences();
+    print(prefs.token);
+
     return Provider(
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
