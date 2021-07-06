@@ -5,8 +5,14 @@ import 'package:login/src/pages/home_page.dart';
 import 'package:login/src/pages/login_page.dart';
 import 'package:login/src/pages/product_page.dart';
 import 'package:login/src/pages/register_page.dart';
+import 'package:login/src/user_preferences/user_prefs.dart';
 
-void main() => runApp(MyApp());
+void main() async {
+  final prefs = new UserPreferences();
+  await prefs.initPrefs();
+
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override

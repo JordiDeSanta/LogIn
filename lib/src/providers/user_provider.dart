@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class UserProvider {
+  final String _firebaseToken = 'AIzaSyB5xGb7WDY8sMWj0vUozsdZK-CjWOn7aEc';
+
   Future<Map<String, dynamic>> login(String email, String password) async {
     final String _firebaseToken = 'AIzaSyB5xGb7WDY8sMWj0vUozsdZK-CjWOn7aEc';
     final Uri _url = Uri.https('identitytoolkit.googleapis.com',
@@ -31,7 +33,6 @@ class UserProvider {
   }
 
   Future<Map<String, dynamic>> newUser(String email, String password) async {
-    final String _firebaseToken = 'AIzaSyB5xGb7WDY8sMWj0vUozsdZK-CjWOn7aEc';
     final Uri _url = Uri.https('identitytoolkit.googleapis.com',
         '/v1/accounts:signUp', {'key': _firebaseToken});
 
